@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FundController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,32 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('contents.home');
-});
+})->middleware('auth');
 
-Route::get('/login', function () {
-    return view('contents.login');
-});
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::get('/register', function () {
-    return view('contents.register');
-});
-
-Route::get('/items', function () {
-    return view('contents.items.index');
-});
-
-Route::get('/funds', function () {
-    return view('contents.funds.index');
-});
-
-Route::get('/transactions', function () {
-    return view('contents.transactions.index');
-});
-
-Route::get('/suppliers', function () {
-    return view('contents.suppliers.index');
-});
-
-Route::get('/customers', function () {
-    return view('contents.customers.index');
-});
+Route::resource('/items', ItemController::class)->middleware('auth');
+Route::resource('/suppliers', SupplierController::class)->middleware('auth');
+Route::resource('/customers', CustomerController::class)->middleware('auth');
+Route::resource('/transactions', CustomerController::class)->middleware('auth');
+Route::resource('/funds', FundController::class)->middleware('auth');

@@ -45,7 +45,8 @@
             <h3>LOGIN</h3>
           </div>
           <!-- Form -->
-          <form class="form-horizontal m-t-20" id="loginform" action="index2.html">
+          <form class="form-horizontal m-t-20" id="loginform" action="/login" method="POST">
+            @csrf
             <div class="row p-b-30">
               <div class="col-12">
                 <div class="input-group mb-3">
@@ -53,16 +54,16 @@
                     <span class="input-group-text bg-danger text-white" id="basic-addon1"><i
                         class="ti-email"></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-lg" placeholder="Email" aria-label="Email"
-                    aria-describedby="basic-addon1" required="">
+                  <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"
+                    aria-label="Email" aria-describedby="basic-addon1" required value="{{ old('email') }}">
                 </div>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text bg-warning text-white" id="basic-addon2"><i
                         class="ti-pencil"></i></span>
                   </div>
-                  <input type="text" class="form-control form-control-lg" placeholder="Password" aria-label="Password"
-                    aria-describedby="basic-addon1" required="">
+                  <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
+                    aria-label="Password" aria-describedby="basic-addon1" required>
                 </div>
               </div>
             </div>
@@ -70,8 +71,7 @@
               <div class="col-12">
                 <div class="form-group">
                   <div class="p-t-20">
-                    <a class="btn btn-info text-white" id="to-recover" href="/register">Register</a>
-                    <button class="btn btn-success float-right" type="submit">Login</button>
+                    <button class="btn btn-success btn-block" type="submit">Login</button>
                   </div>
                 </div>
               </div>
