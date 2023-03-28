@@ -15,7 +15,7 @@ class ItemUnitController extends Controller
      */
     public function index()
     {
-        //
+        return view('contents.item_units.index');
     }
 
     /**

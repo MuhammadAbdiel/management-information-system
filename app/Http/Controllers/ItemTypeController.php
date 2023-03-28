@@ -15,7 +15,7 @@ class ItemTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('contents.item_types.index');
     }
 
     /**

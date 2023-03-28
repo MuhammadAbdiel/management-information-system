@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function transaction_details()
+    {
+        return $this->hasMany(TransactionDetail::class);
+    }
+
+    public function item_types()
+    {
+        return $this->belongsTo(ItemType::class);
+    }
+
+    public function item_units()
+    {
+        return $this->belongsTo(ItemUnit::class);
+    }
 }

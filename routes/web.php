@@ -5,6 +5,8 @@ use App\Http\Controllers\FundController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ItemTypeController;
+use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\SupplierController;
 
 /*
@@ -27,6 +29,8 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::resource('/items', ItemController::class)->middleware('auth');
+Route::resource('/item-types', ItemTypeController::class)->middleware('auth');
+Route::resource('/item-units', ItemUnitController::class)->middleware('auth');
 Route::resource('/suppliers', SupplierController::class)->middleware('auth');
 Route::resource('/customers', CustomerController::class)->middleware('auth');
 Route::resource('/transactions', CustomerController::class)->middleware('auth');

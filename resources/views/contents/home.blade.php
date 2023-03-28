@@ -41,9 +41,27 @@
     <!-- Column -->
     <div class="col-md-6 col-lg-3">
       <div class="card card-hover">
-        <div class="box bg-success text-center">
+        <div class="box bg-info text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-cube"></i></h1>
           <h6 class="text-white">Items</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card card-hover">
+        <div class="box bg-dark text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-format-list-bulleted"></i></h1>
+          <h6 class="text-white">Item Types</h6>
+        </div>
+      </div>
+    </div>
+    <!-- Column -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card card-hover">
+        <div class="box bg-success text-center">
+          <h1 class="font-light text-white"><i class="mdi mdi-cube-outline"></i></h1>
+          <h6 class="text-white">Item Units</h6>
         </div>
       </div>
     </div>
@@ -66,7 +84,7 @@
       </div>
     </div>
     <!-- Column -->
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-6 col-lg-3">
       <div class="card card-hover">
         <div class="box bg-secondary text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-account-plus"></i></h1>
@@ -75,7 +93,7 @@
       </div>
     </div>
     <!-- Column -->
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-6 col-lg-3">
       <div class="card card-hover">
         <div class="box bg-primary text-center">
           <h1 class="font-light text-white"><i class="mdi mdi-account-multiple"></i></h1>
