@@ -30,7 +30,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Address</th>
-                  <th>Phone Numberr</th>
+                  <th>Phone Number</th>
                 </tr>
               </thead>
               <tbody>
