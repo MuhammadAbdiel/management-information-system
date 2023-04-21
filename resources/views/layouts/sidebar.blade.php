@@ -17,9 +17,9 @@
               Types</span></a></li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/item-units"
             aria-expanded="false"><i class="mdi mdi-cube-outline"></i><span class="hide-menu">Item Units</span></a></li>
-        {{-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/funds"
+        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/funds"
             aria-expanded="false"><i class="mdi mdi-currency-usd"></i><span class="hide-menu">Funds</span></a>
-        </li> --}}
+        </li>
         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/transactions"
             aria-expanded="false"><i class="mdi mdi-thumb-up"></i><span class="hide-menu">Transactions</span></a>
         </li>
