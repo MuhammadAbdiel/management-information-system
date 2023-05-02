@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
 use App\Models\Item;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ItemController extends Controller
 {
@@ -25,7 +27,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.items.create');
     }
 
     /**

@@ -23,7 +23,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title mb-3">Item Data</h5>
-          <a href="#" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <a href="/items/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
             <table id="zero_config" class="table table-striped table-bordered">
               <thead>

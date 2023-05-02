@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemUnit;
 use App\Http\Requests\StoreItemUnitRequest;
 use App\Http\Requests\UpdateItemUnitRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemUnitController extends Controller
 {
@@ -15,7 +16,13 @@ class ItemUnitController extends Controller
      */
     public function index()
     {
-        return view('contents.item_units.index');
+        $title = 'Delete Item Unit!';
+        $text = 'Are you sure you want to delete this item unit?';
+        confirmDelete($title, $text);
+
+        return view('contents.item_units.index', [
+            'itemUnits' => ItemUnit::with(['items'])->latest()->get(),
+        ]);
     }
 
     /**
@@ -25,7 +32,7 @@ class ItemUnitController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.item_units.create');
     }
 
     /**
@@ -36,7 +43,10 @@ class ItemUnitController extends Controller
      */
     public function store(StoreItemUnitRequest $request)
     {
-        //
+        ItemUnit::create($request->validated());
+        Alert::success('Success!', 'Item unit has been added.');
+
+        return redirect('/item-units');
     }
 
     /**
@@ -58,7 +68,9 @@ class ItemUnitController extends Controller
      */
     public function edit(ItemUnit $itemUnit)
     {
-        //
+        return view('contents.item_units.edit', [
+            'itemUnit' => $itemUnit,
+        ]);
     }
 
     /**
@@ -70,7 +82,10 @@ class ItemUnitController extends Controller
      */
     public function update(UpdateItemUnitRequest $request, ItemUnit $itemUnit)
     {
-        //
+        $itemUnit->update($request->validated());
+        Alert::success('Success!', 'Item unit has been updated.');
+
+        return redirect('/item-units');
     }
 
     /**
@@ -81,6 +96,9 @@ class ItemUnitController extends Controller
      */
     public function destroy(ItemUnit $itemUnit)
     {
-        //
+        ItemUnit::destroy($itemUnit->id);
+        Alert::success('Success!', 'Item unit has been deleted.');
+
+        return redirect('/item-units');
     }
 }
