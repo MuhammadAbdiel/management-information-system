@@ -28,31 +28,45 @@
             <table id="zero_config" class="table table-striped table-bordered">
               <thead>
                 <tr>
+                  <th>No.</th>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Unit</th>
                   <th>Quantity</th>
                   <th>Price</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {{-- <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr> --}}
+
+                @foreach ($items as $item)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $item->item_type->name }}</td>
+                  <td>{{ $item->item_unit->name }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>{{ $item->quantity }}</td>
+                  <td>{{ $item->price }}</td>
+                  <td>
+                    <a href="/items/{{ $item->id }}/edit" class="btn btn-warning"><i class="mdi mdi-pencil"></i>
+                      Edit</a>
+                    <a href="/items/{{ $item->id }}" class="btn btn-danger" data-confirm-delete="true"><i
+                        class="mdi mdi-delete"></i>
+                      Delete</a>
+                  </td>
                 </tr>
+                @endforeach
+
               </tbody>
               <tfoot>
                 <tr>
+                  <th>No.</th>
                   <th>Name</th>
                   <th>Type</th>
                   <th>Unit</th>
                   <th>Quantity</th>
                   <th>Price</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
             </table>

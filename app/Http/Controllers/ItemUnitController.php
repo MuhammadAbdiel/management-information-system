@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\ItemUnit;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StoreItemUnitRequest;
 use App\Http\Requests\UpdateItemUnitRequest;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemUnitController extends Controller
 {
@@ -14,15 +16,35 @@ class ItemUnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        // $data = ItemUnit::with(['items'])->latest()->get();
+        // if ($request->ajax()) {
+        //     return Datatables::eloquent($data)
+        //         ->addColumn('action', function ($row) {
+        //             $actionBtn = '<a href="/item-units/ ' . $row->id . '/edit" class="btn btn-warning"><i
+        //                             class="mdi mdi-pencil"></i>
+        //                         Edit</a>
+        //                         <a href="/item-units/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
+        //                             class="mdi mdi-delete"></i>
+        //                         Delete</a>';
+        //             return $actionBtn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->addIndexColumn()
+        //         ->make(true);
+        // }
+
         $title = 'Delete Item Unit!';
         $text = 'Are you sure you want to delete this item unit?';
         confirmDelete($title, $text);
 
-        return view('contents.item_units.index', [
-            'itemUnits' => ItemUnit::with(['items'])->latest()->get(),
-        ]);
+        return view(
+            'contents.item_units.index',
+            [
+                'itemUnits' => ItemUnit::with(['items'])->latest()->get(),
+            ]
+        );
     }
 
     /**

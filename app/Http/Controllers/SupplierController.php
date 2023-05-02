@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SupplierController extends Controller
 {
@@ -15,7 +16,13 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('contents.suppliers.index');
+        $title = 'Delete Supplier!';
+        $text = 'Are you sure you want to delete this supplier?';
+        confirmDelete($title, $text);
+
+        return view('contents.suppliers.index', [
+            'suppliers' => Supplier::with(['transactions'])->latest()->get(),
+        ]);
     }
 
     /**
@@ -25,7 +32,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.suppliers.create');
     }
 
     /**
@@ -36,7 +43,10 @@ class SupplierController extends Controller
      */
     public function store(StoreSupplierRequest $request)
     {
-        //
+        Supplier::create($request->validated());
+        Alert::success('Success!', 'Supplier has been added.');
+
+        return redirect('/suppliers');
     }
 
     /**
@@ -58,7 +68,9 @@ class SupplierController extends Controller
      */
     public function edit(Supplier $supplier)
     {
-        //
+        return view('contents.suppliers.edit', [
+            'supplier' => $supplier,
+        ]);
     }
 
     /**
@@ -70,7 +82,10 @@ class SupplierController extends Controller
      */
     public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
-        //
+        $supplier->update($request->validated());
+        Alert::success('Success!', 'Supplier has been updated.');
+
+        return redirect('/suppliers');
     }
 
     /**
@@ -81,6 +96,9 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+        Supplier::destroy($supplier->id);
+        Alert::success('Success!', 'Supplier has been deleted.');
+
+        return redirect('/suppliers');
     }
 }

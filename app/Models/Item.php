@@ -16,12 +16,12 @@ class Item extends Model
         return $this->hasMany(TransactionDetail::class);
     }
 
-    public function item_types()
+    public function item_type()
     {
         return $this->belongsTo(ItemType::class);
     }
 
-    public function item_units()
+    public function item_unit()
     {
         return $this->belongsTo(ItemUnit::class);
     }

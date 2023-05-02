@@ -28,10 +28,10 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-Route::resource('/items', ItemController::class)->middleware('auth');
+Route::resource('/items', ItemController::class)->except(['show'])->middleware('auth');
 Route::resource('/item-types', ItemTypeController::class)->except(['show'])->middleware('auth');
-Route::resource('/item-units', ItemUnitController::class)->except(['show'])->middleware('auth');
-Route::resource('/suppliers', SupplierController::class)->middleware('auth');
-Route::resource('/customers', CustomerController::class)->middleware('auth');
+Route::resource('/item-units', ItemUnitController::class)->except(['show'])->middleware('auth')->name('index', 'item-units.index');
+Route::resource('/suppliers', SupplierController::class)->except(['show'])->middleware('auth');
+Route::resource('/customers', CustomerController::class)->except(['show'])->middleware('auth');
 Route::resource('/transactions', CustomerController::class)->middleware('auth');
 Route::resource('/funds', FundController::class)->middleware('auth');

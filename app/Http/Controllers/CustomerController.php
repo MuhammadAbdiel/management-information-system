@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
 {
@@ -15,7 +16,13 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('contents.customers.index');
+        $title = 'Delete Customer!';
+        $text = 'Are you sure you want to delete this customer?';
+        confirmDelete($title, $text);
+
+        return view('contents.customers.index', [
+            'customers' => Customer::with(['transactions'])->latest()->get(),
+        ]);
     }
 
     /**
@@ -25,7 +32,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('contents.customers.create');
     }
 
     /**
@@ -36,7 +43,10 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        Customer::create($request->validated());
+        Alert::success('Success!', 'Customer has been added.');
+
+        return redirect('/customers');
     }
 
     /**
@@ -58,7 +68,9 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('contents.customers.edit', [
+            'customer' => $customer,
+        ]);
     }
 
     /**
@@ -70,7 +82,10 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->validated());
+        Alert::success('Success!', 'Customer has been updated.');
+
+        return redirect('/customers');
     }
 
     /**
@@ -81,6 +96,9 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+        Alert::success('Success!', 'Customer has been deleted.');
+
+        return redirect('/customers');
     }
 }

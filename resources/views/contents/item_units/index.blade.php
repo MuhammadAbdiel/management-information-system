@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Item Unit Data</h5>
           <a href="/item-units/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table id="zero_config" class="table table-striped table-bordered item-unit-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -39,14 +39,6 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $itemUnit->name }}</td>
                   <td>
-                    {{-- <form class="d-inline-block" action="/item-units/{{ $itemUnit->id }}" method="POST"
-                      id='data-{{ $itemUnit->id }}'>
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" data-name="{{ $itemUnit->name }}" data-id="{{ $itemUnit->id }}"
-                        class="btn btn-danger delete"><i class="mdi mdi-delete"></i>
-                        Delete</button>
-                    </form> --}}
                     <a href="/item-units/{{ $itemUnit->id }}/edit" class="btn btn-warning"><i
                         class="mdi mdi-pencil"></i>
                       Edit</a>
@@ -73,6 +65,31 @@
   </div>
 </div>
 @endsection
+
+{{-- @section('script')
+<script>
+  $(function () {
+
+    var table = $('.item-unit-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ajax: "{{ route('item-units.index') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+
+  });
+</script>
+@endsection --}}
 
 {{-- @section('script')
 <script>

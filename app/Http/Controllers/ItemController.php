@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
+use App\Models\ItemType;
+use App\Models\ItemUnit;
 use App\Http\Requests\StoreItemRequest;
 use App\Http\Requests\UpdateItemRequest;
-use App\Models\Item;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -17,7 +19,13 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return view('contents.items.index');
+        $title = 'Delete Item!';
+        $text = 'Are you sure you want to delete this item?';
+        confirmDelete($title, $text);
+
+        return view('contents.items.index', [
+            'items' => Item::with(['item_type', 'item_unit'])->latest()->get()
+        ]);
     }
 
     /**
@@ -27,7 +35,14 @@ class ItemController extends Controller
      */
     public function create()
     {
-        return view('contents.items.create');
+        // $itemTypes = ItemType::latest()->get();
+        // foreach ($itemTypes as $itemType) {
+        //     dd($itemType->id);
+        // }
+        return view('contents.items.create', [
+            'itemTypes' => ItemType::latest()->get(),
+            'itemUnits' => ItemUnit::latest()->get()
+        ]);
     }
 
     /**
@@ -38,7 +53,10 @@ class ItemController extends Controller
      */
     public function store(StoreItemRequest $request)
     {
-        //
+        Item::create($request->validated());
+        Alert::success('Success', 'Item created successfully');
+
+        return redirect('/items');
     }
 
     /**
@@ -60,7 +78,11 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('contents.items.edit', [
+            'item' => $item,
+            'itemTypes' => ItemType::latest()->get(),
+            'itemUnits' => ItemUnit::latest()->get()
+        ]);
     }
 
     /**
@@ -72,7 +94,10 @@ class ItemController extends Controller
      */
     public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        $item->update($request->validated());
+        Alert::success('Success', 'Item updated successfully');
+
+        return redirect('/items');
     }
 
     /**
@@ -83,6 +108,9 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        Item::destroy($item->id);
+        Alert::success('Success!', 'Item has been deleted.');
+
+        return redirect('/items');
     }
 }

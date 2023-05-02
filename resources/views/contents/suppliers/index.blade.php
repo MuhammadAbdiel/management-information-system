@@ -23,32 +23,47 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title mb-3">Supplier Data</h5>
-          <a href="#" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
+          <a href="/suppliers/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
             <table id="zero_config" class="table table-striped table-bordered">
               <thead>
                 <tr>
+                  <th>No.</th>
+                  <th>Code</th>
                   <th>Name</th>
                   <th>Address</th>
                   <th>Phone Number</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {{-- <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr> --}}
+
+                @foreach ($suppliers as $supplier)
+                <tr>
+                  <td>{{ $loop->iteration }}</td>
+                  <td>{{ $supplier->code }}</td>
+                  <td>{{ $supplier->name }}</td>
+                  <td>{{ $supplier->address }}</td>
+                  <td>{{ $supplier->phone_number }}</td>
+                  <td>
+                    <a href="/suppliers/{{ $supplier->id }}/edit" class="btn btn-warning"><i class="mdi mdi-pencil"></i>
+                      Edit</a>
+                    <a href="/suppliers/{{ $supplier->id }}" class="btn btn-danger" data-confirm-delete="true"><i
+                        class="mdi mdi-delete"></i>
+                      Delete</a>
+                  </td>
                 </tr>
+                @endforeach
+
               </tbody>
               <tfoot>
                 <tr>
+                  <th>No.</th>
+                  <th>Code</th>
                   <th>Name</th>
                   <th>Address</th>
                   <th>Phone Number</th>
+                  <th>Action</th>
                 </tr>
               </tfoot>
             </table>
