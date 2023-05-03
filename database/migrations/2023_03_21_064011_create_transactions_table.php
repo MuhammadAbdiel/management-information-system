@@ -15,9 +15,11 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('supplier_id')->constrained('suppliers');
-            $table->foreignId('customer_id')->constrained('customers');
-            $table->bigInteger('total_price');
+            $table->foreignId('supplier_id')->nullable()->constrained('suppliers');
+            $table->foreignId('customer_id')->nullable()->constrained('customers');
+            $table->foreignId('item_id')->constrained('items');
+            $table->bigInteger('quantity');
+            $table->bigInteger('price_total');
             $table->bigInteger('transaction_status');
             $table->timestamps();
         });

@@ -42,8 +42,8 @@
                 @foreach ($items as $item)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $item->item_type->name }}</td>
                   <td>{{ $item->item_unit->name }}</td>
+                  <td>{{ $item->item_type->name }}</td>
                   <td>{{ $item->name }}</td>
                   <td>{{ $item->quantity }}</td>
                   <td>{{ $item->price }}</td>

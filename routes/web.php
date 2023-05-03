@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ItemTypeController;
 use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +34,5 @@ Route::resource('/item-types', ItemTypeController::class)->except(['show'])->mid
 Route::resource('/item-units', ItemUnitController::class)->except(['show'])->middleware('auth')->name('index', 'item-units.index');
 Route::resource('/suppliers', SupplierController::class)->except(['show'])->middleware('auth');
 Route::resource('/customers', CustomerController::class)->except(['show'])->middleware('auth');
-Route::resource('/transactions', CustomerController::class)->middleware('auth');
+Route::resource('/transactions', TransactionController::class)->middleware('auth');
 Route::resource('/funds', FundController::class)->middleware('auth');

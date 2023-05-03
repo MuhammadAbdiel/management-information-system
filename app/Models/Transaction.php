@@ -21,6 +21,11 @@ class Transaction extends Model
         return $this->belongsTo(Customer::class);
     }
 
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
     public function transaction_details()
     {
         return $this->hasMany(TransactionDetail::class);
