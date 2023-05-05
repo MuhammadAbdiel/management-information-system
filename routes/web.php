@@ -34,5 +34,5 @@ Route::resource('/item-types', ItemTypeController::class)->except(['show'])->mid
 Route::resource('/item-units', ItemUnitController::class)->except(['show'])->middleware('auth')->name('index', 'item-units.index');
 Route::resource('/suppliers', SupplierController::class)->except(['show'])->middleware('auth');
 Route::resource('/customers', CustomerController::class)->except(['show'])->middleware('auth');
-Route::resource('/transactions', TransactionController::class)->middleware('auth');
+Route::resource('/transactions', TransactionController::class)->except(['show', 'destroy'])->middleware('auth');
 Route::resource('/funds', FundController::class)->middleware('auth');

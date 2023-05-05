@@ -59,7 +59,7 @@
 
                   <td>{{ $transaction->item->name }}</td>
                   <td>{{ $transaction->quantity }}</td>
-                  <td>{{ $transaction->price_total }}</td>
+                  <td>Rp. {{ number_format($transaction->price_total) }}</td>
 
                   @if ($transaction->transaction_status == 0)
                   <td>

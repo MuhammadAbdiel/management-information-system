@@ -46,7 +46,7 @@
                   <td>{{ $item->item_type->name }}</td>
                   <td>{{ $item->name }}</td>
                   <td>{{ $item->quantity }}</td>
-                  <td>{{ $item->price }}</td>
+                  <td>Rp. {{ number_format($item->price) }}</td>
                   <td>
                     <a href="/items/{{ $item->id }}/edit" class="btn btn-warning"><i class="mdi mdi-pencil"></i>
                       Edit</a>
