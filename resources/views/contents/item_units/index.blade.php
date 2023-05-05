@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Item Unit Data</h5>
           <a href="/item-units/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered item-unit-datatable">
+            <table {{-- id="zero_config" --}} class="table table-striped table-bordered item-unit-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -34,7 +34,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($itemUnits as $itemUnit)
+                {{-- @foreach ($itemUnits as $itemUnit)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $itemUnit->name }}</td>
@@ -47,7 +47,7 @@
                       Delete</a>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
               <tfoot>
                 <tr>
@@ -66,7 +66,7 @@
 </div>
 @endsection
 
-{{-- @section('script')
+@section('script')
 <script>
   $(function () {
 
@@ -74,9 +74,12 @@
         processing: true,
         serverSide: true,
         responsive: true,
-        ajax: "{{ route('item-units.index') }}",
+        ordering: true,
+        ajax: {
+          url: "{{ url()->current() }}"
+        },
         columns: [
-            {data: 'id', name: 'id'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'name', name: 'name'},
             {
                 data: 'action', 
@@ -89,7 +92,7 @@
 
   });
 </script>
-@endsection --}}
+@endsection
 
 {{-- @section('script')
 <script>

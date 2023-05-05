@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\Supplier;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SupplierController extends Controller
@@ -14,15 +16,35 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = Supplier::with(['transactions'])->latest()->get();
+        if ($request->ajax()) {
+            return Datatables::of($data)
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="/item-types/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                                    class="mdi mdi-pencil"></i>
+                                Edit</a>
+                                <a href="/item-types/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
+                                    class="mdi mdi-delete"></i>
+                                Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
         $title = 'Delete Supplier!';
         $text = 'Are you sure you want to delete this supplier?';
         confirmDelete($title, $text);
 
-        return view('contents.suppliers.index', [
-            'suppliers' => Supplier::with(['transactions'])->latest()->get(),
-        ]);
+        return view(
+            'contents.suppliers.index',
+            // [
+            //     'suppliers' => Supplier::with(['transactions'])->latest()->get(),
+            // ]
+        );
     }
 
     /**

@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Item Type Data</h5>
           <a href="/item-types/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered item-type-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -34,7 +34,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($itemTypes as $itemType)
+                {{-- @foreach ($itemTypes as $itemType)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $itemType->name }}</td>
@@ -47,7 +47,7 @@
                       Delete</a>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
               </tbody>
               <tfoot>
                 <tr>
@@ -64,4 +64,32 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(function () {
+
+    var table = $('.item-type-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ordering: true,
+        ajax: {
+          url: "{{ url()->current() }}"
+        },
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'name', name: 'name'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+
+  });
+</script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Yajra\DataTables\Facades\DataTables;
 use App\Models\Item;
 use App\Models\Customer;
 use App\Models\Supplier;
@@ -18,11 +19,43 @@ class TransactionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('contents.transactions.index', [
-            'transactions' => Transaction::with(['item', 'supplier', 'customer'])->latest()->get(),
-        ]);
+        $data = Transaction::with('item', 'supplier', 'customer')->latest()->get();
+        if ($request->ajax()) {
+            return Datatables::of($data)
+                ->addColumn('supplier', function (Transaction $transaction) {
+                    return $transaction->supplier_id != null ? $transaction->supplier->name : '-';
+                })
+                ->addColumn('customer', function (Transaction $transaction) {
+                    return $transaction->customer_id != null ? $transaction->customer->name : '-';
+                })
+                ->addColumn('item', function (Transaction $transaction) {
+                    return $transaction->item->name;
+                })
+                ->addColumn('updated_at', function (Transaction $transaction) {
+                    return $transaction->updated_at->format('d-m-Y H:i:s');
+                })
+                ->addColumn('price_total', function (Transaction $transaction) {
+                    return 'Rp. ' . number_format($transaction->price_total, 0, ',', '.');
+                })
+                ->addColumn('action', function ($row) {
+                    $actionBtn = '<a href="/item-types/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                                    class="mdi mdi-pencil"></i>
+                                Edit</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action', 'item', 'updated_at', 'price_total', 'supplier', 'customer'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+
+        return view(
+            'contents.transactions.index',
+            // [
+            //     'transactions' => Transaction::with(['item', 'supplier', 'customer'])->latest()->get(),
+            // ]
+        );
     }
 
     /**

@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Supplier Data</h5>
           <a href="/suppliers/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered supplier-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -38,7 +38,7 @@
               </thead>
               <tbody>
 
-                @foreach ($suppliers as $supplier)
+                {{-- @foreach ($suppliers as $supplier)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $supplier->code }}</td>
@@ -53,7 +53,7 @@
                       Delete</a>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
 
               </tbody>
               <tfoot>
@@ -74,4 +74,35 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(function () {
+
+    var table = $('.supplier-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ordering: true,
+        ajax: {
+          url: "{{ url()->current() }}"
+        },
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'code', name: 'code'},
+            {data: 'name', name: 'name'},
+            {data: 'address', name: 'address'},
+            {data: 'phone_number', name: 'phone_number'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+
+  });
+</script>
 @endsection

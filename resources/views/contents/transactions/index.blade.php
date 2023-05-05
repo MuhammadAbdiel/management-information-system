@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Transaction Data</h5>
           <a href="/transactions/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered transaction-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -41,7 +41,7 @@
               </thead>
               <tbody>
 
-                @foreach ($transactions as $transaction)
+                {{-- @foreach ($transactions as $transaction)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
 
@@ -86,7 +86,7 @@
                       Edit</a>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
 
               </tbody>
               <tfoot>
@@ -110,4 +110,43 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(function () {
+
+    var table = $('.transaction-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ordering: true,
+        ajax: {
+          url: "{{ url()->current() }}"
+        },
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'supplier', name: 'supplier.name'},
+            {data: 'customer', name: 'customer.name'},
+            {data: 'item', name: 'item.name'},
+            {data: 'quantity', name: 'quantity'},
+            {data: 'price_total', name: 'price_total'},
+            {data: 'transaction_status', name: 'transaction_status'},
+            {
+              data: 'updated_at', 
+              name: 'updated_at', 
+              orderable: true,
+              searchable: true
+            },
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+
+  });
+</script>
 @endsection

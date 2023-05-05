@@ -25,7 +25,7 @@
           <h5 class="card-title mb-3">Item Data</h5>
           <a href="/items/create" class="btn btn-primary"><i class="mdi mdi-library-plus"></i> Add Data</a>
           <div class="table-responsive mt-3">
-            <table id="zero_config" class="table table-striped table-bordered">
+            <table class="table table-striped table-bordered item-datatable">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -39,7 +39,7 @@
               </thead>
               <tbody>
 
-                @foreach ($items as $item)
+                {{-- @foreach ($items as $item)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->item_unit->name }}</td>
@@ -55,7 +55,7 @@
                       Delete</a>
                   </td>
                 </tr>
-                @endforeach
+                @endforeach --}}
 
               </tbody>
               <tfoot>
@@ -77,4 +77,36 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+  $(function () {
+
+    var table = $('.item-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        responsive: true,
+        ordering: true,
+        ajax: {
+          url: "{{ url()->current() }}"
+        },
+        columns: [
+            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'name', name: 'name'},
+            {data: 'item_type', name: 'item_type.name'},
+            {data: 'item_unit', name: 'item_unit.name'},
+            {data: 'quantity', name: 'quantity'},
+            {data: 'price', name: 'price'},
+            {
+                data: 'action', 
+                name: 'action', 
+                orderable: true, 
+                searchable: true
+            },
+        ]
+    });
+
+  });
+</script>
 @endsection
