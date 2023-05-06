@@ -22,10 +22,10 @@ class CustomerController extends Controller
         if ($request->ajax()) {
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="/item-types/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                    $actionBtn = '<a href="/customers/ ' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>
-                                <a href="/item-types/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
+                                <a href="/customers/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
                                     class="mdi mdi-delete"></i>
                                 Delete</a>';
                     return $actionBtn;

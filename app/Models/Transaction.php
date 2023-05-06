@@ -26,6 +26,11 @@ class Transaction extends Model
         return $this->belongsTo(Item::class);
     }
 
+    public function transaction_histories()
+    {
+        return $this->hasMany(TransactionHistory::class);
+    }
+
     public function transaction_details()
     {
         return $this->hasMany(TransactionDetail::class);

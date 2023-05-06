@@ -101,6 +101,15 @@
         </div>
       </div>
     </div>
+    <!-- Column -->
+    <div class="col-md-12 col-lg-12">
+      <div class="card card-hover">
+        <div class="box bg-light text-center">
+          <h1 class="font-light"><i class="mdi mdi-history"></i></h1>
+          <h6>Histories</h6>
+        </div>
+      </div>
+    </div>
   </div>
 
   {{-- <div class="row">

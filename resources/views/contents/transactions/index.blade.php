@@ -115,7 +115,6 @@
 @section('script')
 <script>
   $(function () {
-
     var table = $('.transaction-datatable').DataTable({
         processing: true,
         serverSide: true,

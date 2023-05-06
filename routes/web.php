@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AmountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FundController;
 use App\Http\Controllers\ItemController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ItemTypeController;
 use App\Http\Controllers\ItemUnitController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TransactionHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +38,6 @@ Route::resource('/suppliers', SupplierController::class)->except(['show'])->midd
 Route::resource('/customers', CustomerController::class)->except(['show'])->middleware('auth');
 Route::resource('/transactions', TransactionController::class)->except(['show', 'destroy'])->middleware('auth');
 Route::resource('/funds', FundController::class)->middleware('auth');
+Route::resource('/histories', TransactionHistoryController::class)->middleware('auth');
+
+Route::get('/amount', [AmountController::class, 'index'])->middleware('auth');

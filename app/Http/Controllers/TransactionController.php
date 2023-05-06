@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Yajra\DataTables\Facades\DataTables;
+use App\Models\Fund;
 use App\Models\Item;
 use App\Models\Customer;
 use App\Models\Supplier;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\TransactionHistory;
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 
@@ -40,7 +42,7 @@ class TransactionController extends Controller
                     return 'Rp. ' . number_format($transaction->price_total, 0, ',', '.');
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="/item-types/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                    $actionBtn = '<a href="/transactions/ ' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>';
                     return $actionBtn;
@@ -93,6 +95,7 @@ class TransactionController extends Controller
         ]);
 
         $item = Item::find($request->item_id);
+        $fund = Fund::find(1);
 
         if ($request->customer_id != null) {
             if ($item->quantity == 0) {
@@ -119,6 +122,16 @@ class TransactionController extends Controller
                     'quantity' => $item->quantity - $request->quantity,
                 ]);
             }
+
+            TransactionHistory::create([
+                'transaction_id' => Transaction::latest()->first()->id,
+                'condition' => 'In',
+                'amount' => Transaction::latest()->first()->price_total
+            ]);
+
+            $fund->update([
+                'amount' => $fund->amount + Transaction::latest()->first()->price_total,
+            ]);
         } else {
             Transaction::create([
                 'supplier_id' => $request->supplier_id,
@@ -131,6 +144,16 @@ class TransactionController extends Controller
 
             $item->update([
                 'quantity' => $item->quantity + $request->quantity,
+            ]);
+
+            TransactionHistory::create([
+                'transaction_id' => Transaction::latest()->first()->id,
+                'condition' => 'Out',
+                'amount' => Transaction::latest()->first()->price_total
+            ]);
+
+            $fund->update([
+                'amount' => $fund->amount - Transaction::latest()->first()->price_total,
             ]);
         }
 

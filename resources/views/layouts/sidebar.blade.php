@@ -44,6 +44,11 @@
             href="/customers" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
               class="hide-menu">Customers</span></a>
         </li>
+        <li class="sidebar-item {{ Request::is('/histories*') ? 'selected' : '' }}"> <a
+            class="sidebar-link waves-effect waves-dark sidebar-link {{ Request::is('/histories*') ? 'active' : '' }}"
+            href="/histories" aria-expanded="false"><i class="mdi mdi-history"></i><span
+              class="hide-menu">Histories</span></a>
+        </li>
       </ul>
     </nav>
     <!-- End Sidebar navigation -->

@@ -34,10 +34,10 @@ class ItemController extends Controller
                     return 'Rp. ' . number_format($item->price, 0, ',', '.');
                 })
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="/item-types/ ' . $row->id . '/edit" class="btn btn-warning"><i
+                    $actionBtn = '<a href="/items/ ' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>
-                                <a href="/item-types/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
+                                <a href="/items/' . $row->id . '" class="btn btn-danger" data-confirm-delete="true"><i
                                     class="mdi mdi-delete"></i>
                                 Delete</a>';
                     return $actionBtn;

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Fund;
 use Illuminate\Database\Seeder;
 
 class FundSeeder extends Seeder
@@ -13,6 +14,14 @@ class FundSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $fund = [
+            [
+                'amount' => 100000000,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ];
+
+        Fund::insert($fund);
     }
 }
