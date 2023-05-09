@@ -130,7 +130,10 @@
             {data: 'item', name: 'item.name'},
             {data: 'quantity', name: 'quantity'},
             {data: 'price_total', name: 'price_total'},
-            {data: 'transaction_status', name: 'transaction_status'},
+            {
+              data: 'transaction_status', 
+              name: 'transaction_status'
+            },
             {
               data: 'updated_at', 
               name: 'updated_at', 

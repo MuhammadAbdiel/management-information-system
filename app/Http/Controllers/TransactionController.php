@@ -41,13 +41,18 @@ class TransactionController extends Controller
                 ->addColumn('price_total', function (Transaction $transaction) {
                     return 'Rp. ' . number_format($transaction->price_total, 0, ',', '.');
                 })
+                ->addColumn('transaction_status', function (Transaction $transaction) {
+                    $button = $transaction->transaction_status == 0 ? '<span class="badge badge-danger">Failed</span>' : $transaction->transaction_status == 1 ? '<span class="badge badge-warning">Pending</span>' : $transaction->transaction_status == 2 ? '<span class="badge badge-success">Process</span>' : '<span class="badge badge-info">Success</span>';
+
+                    return $button;
+                })
                 ->addColumn('action', function ($row) {
                     $actionBtn = '<a href="/transactions/ ' . $row->id . '/edit" class="btn btn-warning"><i
                                     class="mdi mdi-pencil"></i>
                                 Edit</a>';
                     return $actionBtn;
                 })
-                ->rawColumns(['action', 'item', 'updated_at', 'price_total', 'supplier', 'customer'])
+                ->rawColumns(['action', 'item', 'updated_at', 'price_total', 'supplier', 'customer', 'transaction_status'])
                 ->addIndexColumn()
                 ->make(true);
         }
