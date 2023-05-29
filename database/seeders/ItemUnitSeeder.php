@@ -16,7 +16,7 @@ class ItemUnitSeeder extends Seeder
     {
         $itemUnit = [
             [
-                'name' => 'Unit',
+                'name' => 'kg',
                 'created_at' => now(),
                 'updated_at' => now()
             ]

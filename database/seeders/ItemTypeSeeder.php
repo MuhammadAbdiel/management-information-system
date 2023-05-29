@@ -16,15 +16,30 @@ class ItemTypeSeeder extends Seeder
     {
         $itemType = [
             [
-                'name' => 'Jangkrik',
+                'name' => 'Jangkrik Alam',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'name' => 'Ulat',
+                'name' => 'Jangkrik Kalung',
                 'created_at' => now(),
                 'updated_at' => now()
-            ]
+            ],
+            [
+                'name' => 'Ulat Kandang',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Ulat Hongkong',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Ulat Jerman',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
         ];
 
         ItemType::insert($itemType);
