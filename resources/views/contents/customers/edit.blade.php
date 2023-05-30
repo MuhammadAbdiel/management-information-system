@@ -26,7 +26,7 @@
           @csrf
           @method('PUT')
           <div class="card-body">
-            <h4 class="card-title mb-3">Create Customer</h4>
+            <h4 class="card-title mb-3">Update Customer</h4>
             <div class="form-group row">
               <label for="code" class="col-sm-3 text-left control-label col-form-label">Customer Code</label>
               <div class="col-sm-9">
